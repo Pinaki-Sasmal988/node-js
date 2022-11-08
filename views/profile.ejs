@@ -5,7 +5,14 @@
     <title>Profile Page</title>
 </head>
 <body>
+    <%- include('component/header'); %>
     <h3>welcome <%=value.name %> to profile page</h3>
     <h3>Location:-<%=value.city %></h3>
+    <h3>Skill</h3>
+    <ul>
+     <% value.skill.forEach((item)=>{ %>
+        <li> <%= item %></li>
+        <% }) %>
+    </ul>
 </body>
 </html>

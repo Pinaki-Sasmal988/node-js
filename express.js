@@ -10,17 +10,21 @@ data.set('view engine','ejs');
 data.get('/profile',(req,res)=>{
     const value={
         name:"pinaki",
-        city:"kolkata"
+        city:"kolkata",
+        skill:['java','php','python','js']
     }
     res.render('profile',{value});
 });
-// data.get('/home',(req,res)=>{
-//     res.sendFile(`${dirPath}/home.html`);
-// });
-// data.get('/about',(req,res)=>{
-//     res.sendFile(`${dirPath}/about.html`);
-// });
-// data.get('*',(req,res)=>{
-//     res.sendFile(`${dirPath}/404error.html`);
-// });
+data.get('/login',(req,res)=>{
+  res.render('login');
+});
+data.get('/home',(req,res)=>{
+    res.sendFile(`${dirPath}/home.html`);
+});
+data.get('/about',(req,res)=>{
+    res.sendFile(`${dirPath}/about.html`);
+});
+data.get('*',(req,res)=>{
+    res.sendFile(`${dirPath}/404error.html`);
+});
  data.listen(5000);
