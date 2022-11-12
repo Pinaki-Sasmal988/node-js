@@ -12,7 +12,7 @@ app.get('/login',(req,res)=>{
     res.send("This is login");
 })
     
-// app.get('/login',(req,res)=>{
+// app.get('/login',middleWare,(req,res)=>{
 //     res.send("This is login");  =>This in route single middleware
 // })
    
