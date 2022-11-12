@@ -1,24 +1,26 @@
-// Application Middleware 
+// Route Middleware->Its work single route,group of route or all route. 
 const express=require('express');
-const data=express();
-
-  const setAuth=((req,res,next)=>{
-       //console.log('hello middleware');
-       if(!req.query.age){
-        res.send("Please Enter Your Age");
-       }else if(req.query.age<18){
-        res.send("Sorry you can't access this site");
-       }else{
-        next();
-       }
-       
-  })
-data.use(setAuth);
-
-data.get('/',(req,res)=>{
-    res.send("This is home page");
+const middleWare=require('./middleware')
+const route=express.Router();
+const app=express();
+route.use(middleWare);
+//app.use(middleWare);-> This is only for Application middleware
+app.get('/',(req,res)=>{
+    res.send("This is home");
 })
-data.get('/login',(req,res)=>{
-    res.send("This is login page");
+app.get('/login',(req,res)=>{
+    res.send("This is login");
 })
-data.listen(5000);
+    
+// app.get('/login',(req,res)=>{
+//     res.send("This is login");  =>This in route single middleware
+// })
+   
+route.get('/about',(req,res)=>{
+    res.send("This is about");
+})
+route.get('/contact',(req,res)=>{
+    res.send("This is contact");
+})
+app.use('/',route);
+app.listen(5000);
