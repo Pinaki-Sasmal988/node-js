@@ -1,30 +1,24 @@
-const { response } = require('express');
+// Application Middleware 
 const express=require('express');
-const path=require('path');
 const data=express();
-const dirPath=path.join(__dirname,'public');
- /*How to remove extention name from URL and also set page not found*/ 
-//data.use(express.static(dirPath));
 
-data.set('view engine','ejs');
-data.get('/profile',(req,res)=>{
-    const value={
-        name:"pinaki",
-        city:"kolkata",
-        skill:['java','php','python','js']
-    }
-    res.render('profile',{value});
-});
+  const setAuth=((req,res,next)=>{
+       //console.log('hello middleware');
+       if(!req.query.age){
+        res.send("Please Enter Your Age");
+       }else if(req.query.age<18){
+        res.send("Sorry you can't access this site");
+       }else{
+        next();
+       }
+       
+  })
+data.use(setAuth);
+
+data.get('/',(req,res)=>{
+    res.send("This is home page");
+})
 data.get('/login',(req,res)=>{
-  res.render('login');
-});
-data.get('/home',(req,res)=>{
-    res.sendFile(`${dirPath}/home.html`);
-});
-data.get('/about',(req,res)=>{
-    res.sendFile(`${dirPath}/about.html`);
-});
-data.get('*',(req,res)=>{
-    res.sendFile(`${dirPath}/404error.html`);
-});
- data.listen(5000);
+    res.send("This is login page");
+})
+data.listen(5000);
